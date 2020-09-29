@@ -1,0 +1,11 @@
+#this joins files
+python tools/process.py --input_dir plan_aRot --b_dir plan_bRot --operation combine --output_dir site2ADUdata
+
+#this is for first train
+python pix2pix.py --mode train --output_dir site2ADUTrain --input_dir site2ADUdata --display_freq 200 
+
+#this is to restart
+python pix2pix.py --mode train --output_dir planTrain --input_dir joinedPlans --display_freq 200 --checkpoint planTrain
+
+#this is to test
+python pix2pix.py --mode test --output_dir outputTest --input_dir joinedTest --checkpoint planTrain
